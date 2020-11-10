@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Practica forms</title>
+    <meta name="title" content="Practica CSS 1">
+    <meta name="author" content="uptivya">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <style>
+        h2, h1, strong, em, td:nth-child(2), ul ul, input, a:nth-last-child(4){
+            color: red;
+        }
+        a, td:first-child, label{
+            color:blue;
+        }
+        input:last-child{
+            color:black;
+        }
+    </style>
+</head>
+<body>
+    <img src="imatges/Logo1.jpg">
+    <h1>About</h1>
+    <p>It can be intimidating for women to learn and ask questions when they are in an<br> <strong>extreme minority.</strong> While open and welcoming, today's budding developer<br> community is up to <strong>91% male.</strong> If we can empower more females with the confidence<br> in their technulogical capabilities <em>we can begin to change this landscape.</em></p>
+    <h2>Our Locations</h2>
+    <ul>
+        <li>USA</li>
+        <ul>
+            <li><a href="https://www1.nyc.gov/" target="_blank">New York</a></li>
+            <li><a href="https://www.columbus.gov/" target="_blank">Culumbus</a></li>
+            <li><a href="https://www.austintexas.gov/" target="_blank">Austin</a></li>
+            <li><a href="https://www.phila.gov/" target="_blank">Philly</a></li>
+        </ul>
+        <li>World</li>
+        <ul>
+            <li><a href="https://ottawa.ca/en" target="_blank">Ottawa</a></li>
+            <li><a href="https://www.cityofsydney.nsw.gov.au/" target="_blank">Sidney</a></li>
+        </ul>
+    </ul>
+    <h2>Upcoming Classes</h2>
+    <table border="1">
+        <thead>
+            <th>Location</th>
+            <th>Topic</th>
+        </thead>
+        <tr>
+            <td>New York</td>
+            <td>JavaScript & jQuery</td>
+        </tr>
+        <tr>
+            <td>New York</td>
+            <td>HTML & CSS</td>
+        </tr>
+    </table>
+    <h2>Sign Up!</h2>
+    <form method="GET" action="#">
+        <label for="nom">Name: </label><input type="text" name="nom" id="nom" value="Pamela Fox"><br>
+        <label for="email">Email: </label><input type="email" name="email" id="email" value="pamela@gmail.com"><br>
+        <label for="ciutat">Location: </label>
+        <select name="ciutat" id="ciutat">
+            <option selected value="0">San Francisco</option>
+            <option value="1">New York</option>
+            <option value="2">Florida</option>
+        </select>
+        <fieldset>
+            <legend><label>Gender: </label></legend>
+            <label for="female">Female </label><input type="radio" name="gender" value="female" id="female"></radio>
+            <label for="male">Male </label><input type="radio" name="gender" value="male" id="male"></radio>
+        </fieldset>
+        <label for="experience">Experience:</label><br>
+        <textarea id="experience" name="experience"></textarea><br>
+        <input type="submit" id="boto_submit" value="Sign Up">
+    </form>
+    <br><br><br>
+    <a href="https://twitter.com/elnacionalcatEN" target="_blank">Twitter</a>
+     | <a href="https://www.facebook.com/elnacionalfb" target="_blank">Facebook</a>
+     | <a href="https://www.flickr.com/photos/omniumcultural/albums/72157640451937985/" target="_blank">Flickr</a>
+    
+
+</body>    
+</html>
