@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Repas JS 2, operadors</title>
+    <meta name="author" content="uptivya">
+    <meta name="viewport" content="width=viewport-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="title" content="Exercici de Javascript de repàs">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <style>
+        body{
+            padding:20px;
+        }
+        body div, body input{
+            margin:10px;
+        }
+    </style>
+    <script>
+        var comptador = 2;
+        function comptar(){
+            var resultat = "";
+
+            comptador = comptador*comptador;
+
+            resultat = document.getElementById("comptador");
+            resultat.innerHTML ="<h1>"+comptador+"</h1>"
+        }
+    </script>
+</head>
+<body>
+    <input type="button" class="btn btn-outline-primary" value="Comptar" id="comptar" onclick="comptar()">
+    <div id="comptador"></div>
+</body>
+</html>
