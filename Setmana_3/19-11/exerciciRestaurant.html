@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta name="author" content="uptivya">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <style> 
+        body{
+            background-image: url("imatges/bg.jpg");
+            background-repeat: repeat;
+            background-size: 1000px;
+        }
+        #capaFons{
+            background-color: rgba(255,255,255,0.9);
+            position: fixed;
+            width:100%;
+            height:100%;
+            top:0;
+            left:0;
+            z-index: 0;
+        }
+        h1{
+            position: relative;
+            margin:30px;
+            font-family: "Futura";
+            text-transform: uppercase;
+            font-weight: bold;
+            color:salmon;
+            text-shadow: 3px 3px rgb(110, 84, 84);
+        }
+        h2{
+            margin-bottom: 20px;
+        }
+        #menu{
+            background-color: salmon;
+            height: auto;
+            padding: 15px 20px;
+        }
+        .elNav a{
+            margin: 10px 0;
+            display: block;
+            padding:20px 30px;
+            background-color: white;
+            color: salmon;
+            text-decoration: none;
+            text-transform:capitalize;
+        }
+        #containerMenu{
+            padding: 0 30px;
+        }
+        img{
+            width: 100%;
+            margin-bottom: 30px;
+        }
+        #rowPlats{
+            margin:30px;
+        }
+
+
+        @media screen and (min-width:768px){
+            img{
+                width: 60%;
+            }
+        }
+        @media screen and (min-width:992px){
+            img{
+                width: 100%;
+            } 
+            #containerMenu, #containerPlats{
+                max-height: calc(100vh - 140px);
+                height:100vh;
+                overflow-y: scroll;
+            }
+            #containerMenu{
+                max-width:500px;
+            }
+            #menu{
+                height:100%;
+            }
+            
+        }
+        
+    </style>
+</head>
+<body>
+    <div id="capaFons"></div>
+    <h1>El japonès del tio Pepe</h1>
+    <div class="container-fluid">
+        <div class="row">
+            <div id="containerMenu" class="col-lg-4">
+                <nav id="menu">
+                    <div class="row">
+                        <div class="col-md-6 col-lg-12 elNav">
+                            <a href="#">parturient porta</a>
+                        </div>
+                        <div class="col-md-6 col-lg-12 elNav">
+                            <a href="#">parturient porta</a>
+                        </div>
+                        <div class="col-md-6 col-lg-12 elNav">
+                            <a href="#">parturient porta</a>
+                        </div>
+                        <div class="col-md-6 col-lg-12 elNav">
+                            <a href="#">parturient porta</a>
+                        </div>
+                        <div class="col-md-6 col-lg-12 elNav">
+                            <a href="#">parturient porta</a>
+                        </div>
+                        
+                    </div>
+                </nav>
+            </div>
+            <div id="containerPlats" class="col-lg-8">
+                <div class="row">
+                    <div class="col-12">
+                        <h2>Nom Plat</h2>
+                    </div>
+                    <div id="containerImatge" class="col-lg-12 col-xl-7">
+                        <img src="imatges/bao.jpg">
+                    </div>
+                    <div id="containerDescripcio" class="col-lg-12 col-xl-4">
+                        <p>Sed posuere consectetur est at lobortis. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Maecenas faucibus mollis interdum. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.</p>
+                        <p>Cras mattis consectetur purus sit amet fermentum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam porta sem malesuada magna mollis euismod. Etiam porta sem malesuada magna mollis euismod. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Nulla vitae elit libero, a pharetra augue. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae elit libero, a pharetra augue. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas faucibus mollis interdum. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
+                    </div>
+                    <div id="containerPreu" class="offset-9 col-3">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
