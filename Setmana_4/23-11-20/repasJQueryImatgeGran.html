@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta name="author" content="uptivya">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <script src="http://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <style>  
+        .container{
+            padding-top:30px;
+        }
+        #imatgeGran{
+            width:100%;
+        }
+        .imatgePetita img,#imatgeGran img{
+            width:100%;
+            object-fit: cover;
+        }
+        .imatgePetita{
+            padding:20px;
+        }
+        .selected{
+            outline: 3px solid green;
+        }
+        .imatgePetita:hover{
+            cursor:pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <div class="row">
+                    <div id="imatgeGran" class="col-12"><img src="imatges/cat4.jpg"></div>
+                    <div class="col-12">
+                        <div class="row contenidorImatgesPetites">
+                            <div class="imatgePetita col-4"><img src="imatges/cat1.jpg"></div>
+                            <div class="imatgePetita col-4"><img src="imatges/cat2.jpg"></div>
+                            <div class="imatgePetita col-4"><img src="imatges/cat3.jpg"></div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        $(function(){
+            
+
+            $(".imatgePetita img").css("height", $(".imatgePetita img").css("width"));
+            $("#imatgeGran img").css("height", $("#imatgeGran img").css("width"));
+            
+            $(".imatgePetita").mouseenter(function(){
+                var foto = $(this).children().attr("src");
+
+                $("#imatgeGran img").attr("src",foto);
+                $(".imatgePetita img").removeClass("selected");
+                $(this).children().addClass("selected");
+            });
+            $(".imatgePetita").mouseleave(function(){
+                $("#imatgeGran img").attr("src","imatges/cat4.jpg");
+                $(".imatgePetita img").removeClass("selected");
+            });
+            
+            
+            
+            
+            
+        });
+    </script>
+</body>
+</html>
