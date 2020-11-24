@@ -34,7 +34,7 @@
 
         //Funció Validar Formulari
         function validar(){
-            var hasErrors = false;
+            var hasErrors = 0;
 
             var formulari = document.getElementById("formulariContacte");
 
@@ -54,19 +54,18 @@
             
             //Validacio Nom
             if(nom.value.length <= 2){
-                hasErrors = true;
+                hasErrors++;
                 contingutRespostaNom = "Escriu un nom que tingui almenys 3 caràcters.";
                 respostaMalament(respostaNom);
             }else{
-                hasErrors = false;
                 contingutRespostaNom = "Correcte!";
                 respostaBe(respostaNom);
             }
             respostaNom.innerHTML = contingutRespostaNom;
 
             //Validació Edat
-            if(edat.value.length <= 0 || isNaN(edat.value) || edat.value < 18 || edat.value > 122){
-                hasErrors = true;
+            if(edat.value.length <= 0 || isNaN(parseInt(edat.value)) || edat.value < 18 || edat.value > 122){
+                hasErrors++;
                 if(edat.value < 18 && edat.value > 0){
                     contingutRespostaEdat = "Has de ser major d'edat.";
                 }else{
@@ -74,7 +73,6 @@
                 }
                 respostaMalament(respostaEdat);
             }else{
-                hasErrors = false;
                 contingutRespostaEdat = "Correcte!";
                 respostaBe(respostaEdat);
             }
@@ -82,17 +80,16 @@
 
             //Validació Correu
             if(email.value.length < 8 || email.value.indexOf("@") < 3 || email.value.lastIndexOf(".") < email.value.indexOf("@") || email.value.substring(email.value.indexOf("@"),email.value.lastIndexOf(".")).length <= 3 || email.value.length < (email.value.lastIndexOf(".")+3)){
-                hasErrors = true;
+                hasErrors++;
                 contingutRespostaEmail = "Escriu un correu electrònic vàlid.";
                 respostaMalament(respostaEmail);
             }else{
-                hasErrors = false;
                 contingutRespostaEmail = "Correcte!";
                 respostaBe(respostaEmail);
             }
             respostaEmail.innerHTML = contingutRespostaEmail;
 
-            if(!hasErrors){
+            if(hasErrors == 0){
                 formulari.submit();
             }
         }
