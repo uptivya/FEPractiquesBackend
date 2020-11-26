@@ -161,6 +161,13 @@
             color:white;
 
         }
+        .disabled{
+            display:inline-block;
+            background-color: var(--mostassa);
+            padding: 15px 20px;
+            margin-right:20px;
+            line-height: 1;
+        }
 
     </style>
 </head>
@@ -357,10 +364,28 @@
                         }
                     }
                     paginacio.html("");
-
-                    for(i = pagina; i < (Number(pagina)+5); i++){
-                        paginacio.append("<a class='boto' href='#' onClick='return false;'>"+i+"</a>");
+                    console.log(pagina)
+                    if(pagina == 1){
+                        paginacio.append("<p class='disabled'>1</p>")
+                        for(i = (Number(pagina)+1); i < (Number(pagina)+5); i++){
+                            paginacio.append("<a class='boto' href='#' onClick='return false;'>"+i+"</a>");
+                        }
+                    }else if(pagina == 2){
+                        paginacio.append("<a class='boto' href='#' onClick='return false;'>1</a>");
+                        paginacio.append("<p class='disabled'>2</p>");
+                        for(i = (Number(pagina)+1); i < (Number(pagina)+4); i++){
+                            paginacio.append("<a class='boto' href='#' onClick='return false;'>"+i+"</a>");
+                        }
+                    }else if(pagina >= 3){
+                        for(i = (Number(pagina)-2); i < pagina; i++){
+                            paginacio.append("<a class='boto' href='#' onClick='return false;'>"+i+"</a>");
+                        }
+                        paginacio.append("<p class='disabled'>"+i+"</p>");
+                        for(i = (Number(pagina)+1); i < (Number(pagina)+3); i++){
+                            paginacio.append("<a class='boto' href='#' onClick='return false;'>"+i+"</a>");
+                        }
                     }
+                    
                 });
             });
             $(document).on('click','.targeta', function(){
@@ -418,6 +443,7 @@
             });
             $(document).on('click','a', function(){
                 pagina = $(this).text();
+                $(this).attr("disabled","disabled");
             });
         });
     </script>
