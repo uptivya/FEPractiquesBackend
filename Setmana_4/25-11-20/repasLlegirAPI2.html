@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta name="author" content="uptivya">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <script src="http://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <style>  
+
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <input type="button" value="Carregar" id="botoCarregar" class="btn btn-outline-primary">
+    </div>
+    <div id="resposta"><ul></ul></div>
+
+
+
+    <script>
+        $(function(){
+            $("#botoCarregar").click(function(){
+                $.get("https://api.bsmsa.eu/ext/api/bsm/gbfs/v2/en/station_status", function(data,status){
+                    var estacionsBicicletes = data.data.stations;
+                    var estatEstacio = ""
+                    var numeroEstacio = ""
+                    var i = 0;
+                    $("#resposta ul").html("");
+                    for(i = 0; i < estacionsBicicletes.length; i++){
+                        estatEstacio = estacionsBicicletes[i].status;
+                        numeroEstacio = estacionsBicicletes[i].station_id;
+                        $("#resposta ul").append("<li>Número d'estació: "+numeroEstacio+". Estat: "+estatEstacio+"</li>");
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
