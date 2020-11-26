@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>repasAPIBirres</title>
+    <meta name="author" content="uptivya">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+    <script src="http://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <style>  
+        :root{
+            --mostassa: #ffd323;
+            --fons: #24221a;
+        }
+        .targeta{
+            margin:20px;
+            padding:30px;
+            position:relative;
+            float: left;
+            background-color: var(--mostassa);
+            color:white;
+            min-height: 170.5px;
+        }
+        .targeta:hover{
+            cursor: pointer;
+        }
+        h1{
+            margin:20px;
+            padding:30px;
+            border: 1px solid var(--mostassa);
+            display:block;
+            width:fit-content
+        }
+        .container{
+            margin-top:50px;
+        }
+        #botoBuscar{
+            margin: 40px 0 10px;
+            color:black;
+            border-radius: 0;
+        }
+        input[type="text"],input[type="text"]:focus,input[type="text"]:active,select{
+            outline: 0;
+            padding: 6px 12px;
+            border: 1px solid var(--mostassa);
+            margin-right: 30px;
+        }
+        #textCervesa{
+            margin: 10px 0;
+            width:100%;
+        }
+        input[type="text"]::placeholder{
+            color:rgb(207, 207, 207);
+        }
+        .rowEspecificacions p{
+            display: inline-block;
+            font-weight: bold;
+            margin: 25px 30px 0 0;
+        }
+        #containerBuscadorNom, #containerBuscadorEspecificacions, #containerElementsPP{
+            padding: 0 20px;
+        }
+        #containerElementsPP h3{
+            margin-bottom:17px;
+        }
+        hr{
+            margin-bottom:30px;
+        }
+        .rowEspecificacions{
+            position: relative;
+            height: 58px;
+            margin-top:25px;
+        }
+        .rowEspecificacions label:nth-child(2){
+            top: 23px;
+            position: absolute;
+            left: 80px;
+        }
+        .rowEspecificacions label:nth-child(4){
+            top: 23px;
+            position: absolute;
+            left: 350px;
+        }
+        .rowEspecificacions input[type="text"]:nth-child(3){
+            top: 18px;
+            position: absolute;
+            left: 130px;
+        }   
+        .rowEspecificacions input[type="text"]:nth-child(5){
+            top: 18px;
+            position: absolute;
+            left: 400px;
+        }   
+        img{
+            max-height: 200px;
+            display: block;
+            margin: 10px auto 30px;
+        }
+        #reposta{
+            position:relative;
+            width:100%;
+        }
+        #detalls{
+            height:100vh;
+            width:400px;
+            background-color: var(--fons);
+            position:fixed;
+            right:0;
+            top:0;
+            padding:30px 40px;
+            overflow: scroll;
+            display:none;
+        }
+        #imatgeCervesa{
+            width: 100%;
+            padding:30px;
+            background-color: var(--mostassa);
+            margin-bottom: 30px;
+            position: relative;
+        }
+        #detallsCervesa{
+            width:100%;
+            padding:30px;
+            background-color: white;
+        }
+        #detallsCervesa hr{
+            border: 2px solid var(--fons);
+        }
+        #tancar{
+            padding:15px 18px;
+            background-color: var(--fons);
+            position: absolute;
+            top:5px;
+            right:5px;
+            z-index: 100;
+            line-height:1;
+        }
+        #tancar i{
+            color: white;
+        }
+        #tancar:hover{
+            cursor:pointer;
+        }
+        .clear{
+            clear: both;
+        }
+        #paginacio{
+            margin:25px 20px 45px;
+        }
+        #paginacio a{
+            margin-right: 20px;
+            padding:15px 20px;
+            text-decoration: none;
+            color:black;
+            border: 1px solid var(--mostassa);
+            transition: ease .3s;
+        }
+        #paginacio a:hover{
+            background-color: var(--mostassa);
+            color:white;
+
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="container offset-1 col-10">
+            <div class="row">
+                <div class="col-8">
+                    <div id="containerBuscadorNom">
+                        <h3>Nom de la cervesa: </h3>
+                        <input type="text" placeholder="Escriu per nom de cervesa" name="textCervesa" id="textCervesa">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div id="containerElementsPP">
+                        <h3>Elements per pàgina</h3>
+                        <select id="elementsPP" name="elementsPP">
+                            <option value="10" selected>10</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                            <option value="80">80</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <hr>
+            <div class="row">
+                <div class="col-12">
+                    <div id="containerBuscadorEspecificacions">
+                        <h3>Paràmetres tècnics: </h3>
+                        <div class="rowEspecificacions">
+                            <p>ABV</p>
+                            <label for="textMinAbv">min</label>
+                            <input type="text" name="textMinAbv" id="textMinAbv">
+                            <label for="textMaxAbv">max</label>
+                            <input type="text" name="textMaxAbv" id="textMaxAbv">
+                        </div>
+                        <div class="rowEspecificacions">
+                            <p>IBU</p>
+                            <label for="textMinIbu">min</label>
+                            <input type="text" name="textMinIbu" id="textMinIbu">
+                            <label for="textMaxIbu">max</label>
+                            <input type="text" name="textMaxIbu" id="textMaxIbu">
+                        </div>
+                        <div class="rowEspecificacions">
+                            <p>EBC</p>
+                            <label for="textMinEbc">min</label>
+                            <input type="text" name="textMinEbc" id="textMinEbc">
+                            <label for="textMaxEbc">max</label>
+                            <input type="text" name="textMaxEbc" id="textMaxEbc">
+                        </div>
+                        <input type="button" value="Busca" id="botoBuscar" class="btn btn-outline-warning boto">
+                    </div>
+                </div>
+            </div>
+            <hr>
+            
+            <div id="resposta">
+                
+            </div>
+            <div class="clear"></div>
+            <div id="paginacio">
+
+            </div>
+        </div>
+        <div id="detalls">
+            <div id='imatgeCervesa'>
+                <div id='tancar'>
+                    <i class='fas fa-times'></i>
+                </div>
+                <img>
+            </div>
+            <div id='detallsCervesa'>
+                <h2></h2>
+                <p id='detallsTagline'><em></em></p>
+                <hr>
+                <p id='detallsDescCervesa'></p>
+                <p id='detallsAbv'></p>
+                <p id='detallsIbu'></p>
+                <p id='detallsEbc'></p>
+            </div>
+        </div>
+    </div>
+    
+
+
+
+    <script>
+        $(function(){
+            var i = 0;
+            var contingut = $("#resposta");
+            var detalls = $("#detalls");
+            var container = $(".container");
+            var paginacio =$("#paginacio");
+
+            var cerveses = ""
+            var elementsPP = "";
+            var pagina = "";
+            var adresa = "";
+            var nomCervesa = "";
+            var tagline = "";
+            var imatge = "";
+            var idCervesa = "";
+            var textCervesa = "";
+            var numCervesa = "";
+            var descCervesa = "";
+            var abv = "";
+            var ibu = "";
+            var ebc = "";
+
+
+            var pmtCervesa = "";
+            var textMinAbv = "";
+            var textMaxAbv = "";
+            var textMinIbu = "";
+            var textMaxIbu = "";
+            var textMinEbc = "";
+            var textMaxEbc = "";
+
+            var detallsImatge = $("#imatgeCervesa img");
+            var detallsNom = $("#detallsCervesa h2");
+            var detallsTagline = $("#detallsTagline em");
+            var detallsDescCervesa = $("#detallsDescCervesa");
+            var detallsAbv = $("#detallsAbv");
+            var detallsIbu = $("#detallsIbu");
+            var detallsEbc = $("#detallsEbc");
+
+
+
+            $(document).on('click','.boto', function(){
+
+                if($(this).val() == "Busca"){
+                    pagina = 1;
+                }else{
+                    pagina = $(this).text();
+                }
+
+                elementsPP = $("#elementsPP").val();
+                pmtCervesa = $("#textCervesa").val();
+                textMinAbv = $("#textMinAbv").val();
+                textMaxAbv = $("#textMaxAbv").val();
+                textMinIbu = $("#textMinIbu").val();
+                textMaxIbu = $("#textMaxIbu").val();
+                textMinEbc = $("#textMinEbc").val();
+                textMaxEbc = $("#textMaxEbc").val();
+
+                
+                adresa = "https://api.punkapi.com/v2/beers?page="+pagina+"&per_page="+elementsPP;
+                
+                if(pmtCervesa != ""){
+                    adresa += "&beer_name="+pmtCervesa;
+                }
+                if(textMinAbv != ""){
+                    adresa += "&abv_gt="+textMinAbv;
+                }
+                if(textMaxAbv != ""){
+                    adresa += "&abv_lt="+textMaxAbv;
+                }
+                if(textMinIbu != ""){
+                    adresa += "&ibu_gt="+textMinIbu;
+                }
+                if(textMaxIbu != ""){
+                    adresa += "&ibu_lt="+textMaxIbu;
+                }
+                if(textMinEbc != ""){
+                    adresa += "&ebc_gt="+textMinEbc;
+                }
+                if(textMaxEbc != ""){
+                    adresa += "&ebc_lt="+textMaxEbc;
+                }
+
+                detalls.hide();
+                container.css({"margin-left": "auto", "max-width": "auto"});
+                contingut.html("");
+                $.get(adresa, function(data,status){
+                    cerveses = data;
+                    if(cerveses.length == 0){
+                        contingut.append("<h1>No tenim cap cervesa amb els paràmetres indicats.");
+                    }else{
+                        contingut.append("<h1>Cerveses</h1>");
+                        for(i = 0; i < cerveses.length; i++){
+                            nomCervesa = cerveses[i].name;
+                            tagline = cerveses[i].tagline;
+                            imatge = cerveses[i].image_url;
+                            idCervesa = cerveses[i].id;
+
+                            textTargeta = "<div data-numProducte='"+idCervesa+"' class='targeta'>";
+                            if(imatge != null){
+                                textTargeta += "<img src="+imatge+">";
+                            }
+                            textTargeta += "<h3>Cervesa "+nomCervesa+"</h3><p>"+tagline+"</div>";
+                            contingut.append(textTargeta);
+                        }
+                    }
+                    paginacio.html("");
+
+                    for(i = pagina; i < (Number(pagina)+5); i++){
+                        paginacio.append("<a class='boto' href='#' onClick='return false;'>"+i+"</a>");
+                    }
+                });
+            });
+            $(document).on('click','.targeta', function(){
+                detalls.delay(500).show();
+                container.css({"margin-left": 0, "max-width": "calc(100% - 400px)"});
+
+                idCervesa = $(this).attr("data-numProducte");
+                adresa = "https://api.punkapi.com/v2/beers?ids="+idCervesa;
+
+                $.get(adresa, function(data,status){
+                    cerveses = data;
+                    nomCervesa = cerveses[0].name;
+                    tagline = cerveses[0].tagline;
+                    idCervesa = cerveses[0].id;
+                    imatge = cerveses[0].image_url;
+                    descCervesa =  cerveses[0].description;
+                    abv = cerveses[0].abv;
+                    ibu = cerveses[0].ibu;
+                    ebc = cerveses[0].ebc;
+
+                    if(imatge != null){
+                        detallsImatge.show();
+                        detallsImatge.attr("src",imatge);
+                    }else{
+                        detallsImatge.hide();
+                    }
+                    if(abv != null){
+                        detallsAbv.show();
+                    }else{
+                        detallsAbv.hide();
+                    }
+                    if(ibu != null){
+                        detallsIbu.show();
+                    }else{
+                        detallsIbu.hide();
+                    }
+                    if(ebc != null){
+                        detallsEbc.show();
+                    }else{
+                        detallsEbc.hide();
+                    }
+                    
+                    detallsNom.text(nomCervesa);
+                    detallsTagline.text(tagline);
+                    detallsDescCervesa.text(descCervesa);
+                    detallsAbv.html("<strong>ABV</strong> - "+abv);
+                    detallsIbu.html("<strong>IBU</strong> - "+ibu);
+                    detallsEbc.html("<strong>EBC</strong> - "+ebc);
+                });
+
+            });
+            $("#tancar").click(function(){
+                detalls.hide();
+                container.css({"margin-left": "auto", "max-width": "auto"});
+            });
+            $(document).on('click','a', function(){
+                pagina = $(this).text();
+            });
+        });
+    </script>
+</body>
+</html>
+
