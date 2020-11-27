@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Primer Exercici Grafic</title>
+    <meta name="author" content="uptivya">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+    <script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <style>  
+        .ct-chart{
+            width:100%;
+            height:600px;
+        }
+        h1{
+            margin:50px 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Evolució del preu del peix del tipus Ossis Blau</h1>
+        <div class="ct-chart"></div>
+    </div>
+    
+
+
+    <script>
+        $(function(){
+
+            var i = 0;
+            var labelsChart = [];
+            var preusChart = [];
+
+
+            $.get("https://analisi.transparenciacatalunya.cat/resource/ge3m-4jgm.json?grup=OSSIS-BLAU", function(data,status){
+                for(i = 0; i < data.length; i++){
+                    labelsChart.push(data[i].any);
+                    preusChart.push(data[i].preu_kg)
+                }
+                labelsChart.push("");
+                
+                
+                var chart = new Chartist.Line('.ct-chart', {
+                    labels: labelsChart,
+                    series: [preusChart]
+                },{
+                // Remove this configuration to see that chart rendered with cardinal spline interpolation
+                // Sometimes, on large jumps in data values, it's better to use simple smoothing.
+                lineSmooth: Chartist.Interpolation.simple({
+                    divisor: 2
+                }),
+                fullWidth: true,
+                chartPadding: {
+                    right: 20
+                },
+                low: data[(data.length - 1)].preu_kg
+                });
+            });
+
+        });
+    </script>
+</body>
+</html>
+
