@@ -108,49 +108,46 @@
                     $("#escollir"+i+" option:nth-child("+(i+1)+")").attr("selected","selected");
                 }
                 
-            });
-            console.log(noms)
-            
 
-            /*for(i = 0; i < numeroSelectors; i++){
-
-                adresa2 = "https://analisi.transparenciacatalunya.cat/resource/ge3m-4jgm.json?grup="+noms[i]
+                //bucles per comprovar el nom i si és igual afegir el preu a l'array
+                adresa2 = "https://analisi.transparenciacatalunya.cat/resource/ge3m-4jgm.json"
                 $.get(adresa2, function(data,status){
                     var liniaPreusChart = []
-                    for(i = 0; i < data.length; i++){
-                        liniaPreusChart.push(data[i].preu_kg)
-                    }  
+                    for(i = 0; i<noms; i++){
+                        for(i = 0; i < data.length; i++){
+                            liniaPreusChart.push(data[i].preu_kg)
+                        };
+                    }
                     preusChart.push(liniaPreusChart);
                 });
-            }
 
-            adresa = "https://analisi.transparenciacatalunya.cat/resource/ge3m-4jgm.json?grup=OSSIS-BLAU";
-            $.get(adresa, function(data,status){
+                adresa = "https://analisi.transparenciacatalunya.cat/resource/ge3m-4jgm.json?grup=OSSIS-BLAU";
+                $.get(adresa, function(data,status){
                 for(i = 0; i < data.length; i++){
                     labelsChart.push(data[i].any);
                 }
                 labelsChart.push("");
-            });
+                });
 
 
 
-            
-            var chart = new Chartist.Line('.ct-chart', {
+
+                var chart = new Chartist.Line('.ct-chart', {
                 labels: labelsChart,
                 series: preusChart
-            },{
-            // Remove this configuration to see that chart rendered with cardinal spline interpolation
-            // Sometimes, on large jumps in data values, it's better to use simple smoothing.
-            lineSmooth: Chartist.Interpolation.simple({
+                },{
+                // Remove this configuration to see that chart rendered with cardinal spline interpolation
+                // Sometimes, on large jumps in data values, it's better to use simple smoothing.
+                lineSmooth: Chartist.Interpolation.simple({
                 divisor: 2
-            }),
-            fullWidth: true,
-            chartPadding: {
+                }),
+                fullWidth: true,
+                chartPadding: {
                 right: 20
-            },
-            low: 0
-            });   */         
-            
+                },
+                low: 0
+                });   
+            });      
         });
     </script>
 </body>
