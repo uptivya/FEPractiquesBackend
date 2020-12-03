@@ -32,6 +32,22 @@
             margin:0 20px 0 0;
             line-height: 1;
         }
+        .containerSelect:first-child label{
+            background-color: #d70206;
+        }
+        .containerSelect:nth-child(2) label{
+            background-color: #f05b4f;
+        }
+        .containerSelect:nth-child(3) label{
+            background-color: #f4c63d;
+        }
+        .containerSelect:nth-child(4) label{
+            background-color: #d17905;
+        }
+        .containerSelect:nth-child(5) label{
+            background-color: #453d3f;
+        }
+        
         .containerSelect label,.escollir{
             display: block;
             float: left;
@@ -48,31 +64,31 @@
     <div class="container">
         <div class="containerSelect">
             <label for="escollir0"></label>
-            <select id="escollir0" class="escollir capitalize">
+            <select data-numeroSelect="0" id="escollir0" class="escollir capitalize">
             </select>
             <div class="clear"></div>
         </div>
         <div class="containerSelect">
             <label for="escollir1"></label>
-            <select id="escollir1" class="escollir capitalize">
+            <select data-numeroSelect="1" id="escollir1" class="escollir capitalize">
             </select>
             <div class="clear"></div>
         </div>
         <div class="containerSelect">
             <label for="escollir2"></label>
-            <select id="escollir2" class="escollir capitalize">
+            <select data-numeroSelect="2" id="escollir2" class="escollir capitalize">
             </select>
             <div class="clear"></div>
         </div>
         <div class="containerSelect">
             <label for="escollir3"></label>
-            <select id="escollir3" class="escollir capitalize">
+            <select data-numeroSelect="3" id="escollir3" class="escollir capitalize">
             </select>
             <div class="clear"></div>
         </div>
         <div class="containerSelect">
             <label for="escollir4"></label>
-            <select id="escollir4" class="escollir capitalize">
+            <select data-numeroSelect="4" id="escollir4" class="escollir capitalize">
             </select>
             <div class="clear"></div>
         </div>
@@ -85,12 +101,16 @@
         $(function(){
 
             var i = 0;
+            var j = 0;
             var labelsChart = [];
             var preusChart = [];
+            var preusDisplay = [];
             var noms = [];
             var grup = "";
             var selectEscollir = $(".escollir");
             var numeroSelectors = $(".containerSelect select").length;
+
+            
 
             var adresa = "";
             var adresa2 = "";
@@ -103,51 +123,75 @@
                     optionText = grup.toLowerCase();
                     selectEscollir.append("<option val='"+grup+"'>"+optionText+"</option>");
                     noms.push(grup);
+                    preusChart.push([]);
                 }
                 for(i = 0; i < numeroSelectors; i++){
                     $("#escollir"+i+" option:nth-child("+(i+1)+")").attr("selected","selected");
                 }
                 
-
+                
                 //bucles per comprovar el nom i si és igual afegir el preu a l'array
                 adresa2 = "https://analisi.transparenciacatalunya.cat/resource/ge3m-4jgm.json"
                 $.get(adresa2, function(data,status){
-                    var liniaPreusChart = []
-                    for(i = 0; i<noms; i++){
-                        for(i = 0; i < data.length; i++){
-                            liniaPreusChart.push(data[i].preu_kg)
-                        };
+                    for(i = 0; i < data.length; i++){
+                        for(j = 0; j < noms.length; j++){
+                            if(data[i].grup == noms[j]){
+                                preusChart[j].push(data[i].preu_kg);
+                            }
+                        }
+                        if(data[i].grup == noms[0]){
+                            labelsChart.push(data[i].any);
+                        } 
                     }
-                    preusChart.push(liniaPreusChart);
-                });
+                    labelsChart.push("");
 
-                adresa = "https://analisi.transparenciacatalunya.cat/resource/ge3m-4jgm.json?grup=OSSIS-BLAU";
-                $.get(adresa, function(data,status){
-                for(i = 0; i < data.length; i++){
-                    labelsChart.push(data[i].any);
-                }
-                labelsChart.push("");
-                });
-
-
-
-
-                var chart = new Chartist.Line('.ct-chart', {
-                labels: labelsChart,
-                series: preusChart
-                },{
-                // Remove this configuration to see that chart rendered with cardinal spline interpolation
-                // Sometimes, on large jumps in data values, it's better to use simple smoothing.
-                lineSmooth: Chartist.Interpolation.simple({
-                divisor: 2
-                }),
-                fullWidth: true,
-                chartPadding: {
-                right: 20
-                },
-                low: 0
-                });   
-            });      
+                    for(i = 0; i < 5; i++){
+                        preusDisplay.push(preusChart[i])
+                    }
+                    var chart = new Chartist.Line('.ct-chart', {
+                        labels: labelsChart,
+                        series: preusDisplay
+                    },{
+                    // Remove this configuration to see that chart rendered with cardinal spline interpolation
+                    // Sometimes, on large jumps in data values, it's better to use simple smoothing.
+                    lineSmooth: Chartist.Interpolation.simple({
+                    divisor: 2
+                    }),
+                    fullWidth: true,
+                    chartPadding: {
+                    right: 20
+                    },
+                    low: 0
+                    });
+                    console.log(preusDisplay)
+                    $(".escollir").change(function(){
+                        nomPeix = $(this).val();
+                        nomPeix = nomPeix.toUpperCase();
+                        for(i = 0; i < noms.length; i++){
+                            if(nomPeix == noms[i]){
+                                preusDisplay[$(this).attr("data-numeroSelect")] = preusChart[i];
+                            };
+                        }
+                        var chart = new Chartist.Line('.ct-chart', {
+                            labels: labelsChart,
+                            series: preusDisplay
+                        },{
+                        // Remove this configuration to see that chart rendered with cardinal spline interpolation
+                        // Sometimes, on large jumps in data values, it's better to use simple smoothing.
+                        lineSmooth: Chartist.Interpolation.simple({
+                        divisor: 2
+                        }),
+                        fullWidth: true,
+                        chartPadding: {
+                        right: 20
+                        },
+                        low: 0
+                        });
+                        console.log(preusDisplay);
+                    })
+                    
+                });  
+            });        
         });
     </script>
 </body>
