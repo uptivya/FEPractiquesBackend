@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta name="author" content="uptivya">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/5c757390c0.js" crossorigin="anonymous"></script>
+    <style>  
+        body{
+            padding:30px;
+        }
+        body label, body input{
+            margin-right: 30px;
+        }
+        #textTemperatura{
+            width:300px;
+            padding: 10px;
+        }
+        #botoNota{
+            display: block;
+            padding:12px 20px;
+        }
+        #titol{
+            font-family: "Futura", sans-serif;
+            font-weight: bold;
+            text-transform: uppercase;
+            width:545px;
+            margin-right: 30px;
+            display: block;
+            position: relative;
+            float: left;
+        }
+        #textNota{
+            margin-top: -6px;
+            height:70px;
+            width:100px;
+            display: block;
+            position: relative;
+            float: left;
+        }
+        .clear{
+            clear: both;
+        }
+        #notaPintada{
+            color:#ffc107;
+            font-size: 30pt;
+        }
+        #resultat{
+            margin-top:25px;
+        }
+        .btn:focus{
+            box-shadow: none;
+        }
+    </style>
+    <script>
+        function comprovar(){
+            var nota = Math.random()*10;
+            var notaString = nota.toString();
+
+            var textNota = document.getElementById("textNota");
+            var resultat = document.getElementById("resultat");
+
+            var lletraNota = "";
+            var introNota = "";
+
+            if(nota >= 9.7){
+                lletraNota = "A+";
+            }else if(nota >=9.3){
+                lletraNota = "A";
+            }else if(nota >=9){
+                lletraNota = "A-";
+            }else if(nota >=8.7){
+                lletraNota = "B+";
+            }else if(nota >=8.3){
+                lletraNota = "B";
+            }else if(nota >=8){
+                lletraNota = "B-";
+            }else if(nota >=7.7){
+                lletraNota = "C+";
+            }else if(nota >=7.3){
+                lletraNota = "C";
+            }else if(nota >=7){
+                lletraNota = "C-";
+            }else if(nota >=6.7){
+                lletraNota = "D+";
+            }else if(nota >=6.3){
+                lletraNota = "D";
+            }else if(nota >=6){
+                lletraNota = "D-";
+            }else{
+                lletraNota = "F";
+            }
+
+            if(nota >= 8){
+                introNota = "Enhorabona!"
+            }else if(nota >= 6){
+                introNota = "Aprovat/da."
+            }else{
+                introNota = "Has de seguir treballant."
+            }
+
+            textNota.innerHTML = "<p id='notaPintada'>"+notaString.substr(0,4)+"</p>"
+            resultat.innerHTML = "<h1>"+introNota+" Has tret una "+lletraNota+"</h1>";
+        }
+    </script>
+</head>
+<body>
+    <h1 id="titol">Quina nota has tret?</h1>
+    <div id="textNota"></div>
+    <div class="clear"></div>
+    <input type="button" class="btn btn-outline-warning" id="botoNota" value="Descobreix la nota" onclick="comprovar()">
+    <div id="resultat"></div>
+</body>
+</html>
